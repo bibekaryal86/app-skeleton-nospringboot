@@ -12,5 +12,7 @@ automatic_scaling:
   min_pending_latency: 5000ms
   max_pending_latency: 10000ms
   max_concurrent_requests: 80
+env_variables:
+  SPRING_PROFILES_ACTIVE: production
 includes:
   - app-credentials.yaml
