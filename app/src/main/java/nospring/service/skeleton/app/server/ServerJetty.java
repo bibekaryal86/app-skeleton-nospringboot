@@ -1,25 +1,21 @@
 package nospring.service.skeleton.app.server;
 
 import jakarta.servlet.DispatcherType;
-import lombok.extern.slf4j.Slf4j;
+import nospring.service.skeleton.app.filter.ServletFilter;
+import nospring.service.skeleton.app.servlet.AppPing;
 import nospring.service.skeleton.app.servlet.AppReset;
+import nospring.service.skeleton.app.util.Util;
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.servlet.ServletHandler;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
-import nospring.service.skeleton.app.filter.ServletFilter;
-import nospring.service.skeleton.app.util.Util;
-import nospring.service.skeleton.app.servlet.AppPing;
 
 import java.util.EnumSet;
 
-@Slf4j
 public class ServerJetty {
 
     public void start() throws Exception {
-        log.info("Start Jetty Server Initialization!!!");
-
         QueuedThreadPool threadPool = new QueuedThreadPool(Util.SERVER_MAX_THREADS, Util.SERVER_MIN_THREADS, Util.SERVER_IDLE_TIMEOUT);
         Server server = new Server(threadPool);
 
@@ -31,7 +27,6 @@ public class ServerJetty {
 
         server.setHandler(getServletHandler());
         server.start();
-        log.info("Finish Jetty Server Initialization!!!");
     }
 
     private ServletHandler getServletHandler() {

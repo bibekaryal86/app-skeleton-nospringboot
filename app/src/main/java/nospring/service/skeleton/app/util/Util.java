@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Base64;
+import java.util.Collection;
+import java.util.Map;
 
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -39,9 +41,13 @@ public class Util {
         return LocalDateTime.now(ZoneId.of(getSystemEnvProperty(Util.TIME_ZONE)));
     }
 
-    public static boolean hasText(String string) {
-        return (string != null && !string.trim().isEmpty());
+    public static boolean hasText(String s) {
+        return (s != null && !s.trim().isEmpty());
     }
+
+    public static boolean isEmpty(Collection<?> c) { return (c == null || c.isEmpty()); }
+
+    public static boolean isEmpty(Map<?, ?> m) { return (m == null || m.isEmpty()); }
 
     public static Gson getGson() {
         return new GsonBuilder()
@@ -61,5 +67,21 @@ public class Util {
         String authorization = Base64.getEncoder().encodeToString(String.format("%s:%s", username, password).getBytes());
         String headerAuth = request.getHeader("Authorization");
         return hasText(headerAuth) && headerAuth.equals(String.format("Basic %s", authorization));
+    }
+
+    public static String getRequestPathParameter(HttpServletRequest request, int length, int position) {
+        String[] requestUriArray = request.getRequestURI().split("/");
+        if (requestUriArray.length == length && hasText(requestUriArray[position])) {
+            return requestUriArray[position];
+        }
+        return null;
+    }
+
+    public static Object getRequestBody(HttpServletRequest request, Class<?> clazz) {
+        try {
+            return getGson().fromJson(request.getReader(), clazz);
+        } catch (Exception ex) {
+            return null;
+        }
     }
 }

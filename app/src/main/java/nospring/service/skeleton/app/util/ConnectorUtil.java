@@ -3,6 +3,8 @@ package nospring.service.skeleton.app.util;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import nospring.service.skeleton.app.exception.CustomRuntimeException;
+import org.eclipse.jetty.http.HttpMethod;
 
 import java.io.IOException;
 import java.net.URI;
@@ -10,7 +12,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
-import java.util.Base64;
+import java.util.Map;
 
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -31,53 +33,64 @@ public class ConnectorUtil {
     }
 
     private static HttpRequest getHttpRequestBuilder(String endpoint,
+                                                     HttpMethod httpMethod,
                                                      Object bodyObject,
-                                                     boolean isGet,
-                                                     String authorization) {
+                                                     Map<String, String> headers) {
         HttpRequest.Builder httpRequestBuilder = HttpRequest.newBuilder()
                 .uri(getUri(endpoint))
                 .header("Content-Type", "application/json");
-                // add headers as required
 
-        if (Util.hasText(authorization)) {
-            httpRequestBuilder = httpRequestBuilder.header("Authorization", authorization);
+        if (headers != null && !headers.isEmpty()) {
+            for (Map.Entry<String, String> entry : headers.entrySet()) {
+                httpRequestBuilder = httpRequestBuilder.header(entry.getKey(), entry.getValue());
+            }
         }
 
-        if (isGet) {
-            httpRequestBuilder = httpRequestBuilder.GET();
-        } else {
+        if (httpMethod == HttpMethod.POST) {
             httpRequestBuilder = httpRequestBuilder.POST(getPOST(bodyObject));
+        } else if (httpMethod == HttpMethod.PUT) {
+            httpRequestBuilder = httpRequestBuilder.PUT(getPOST(bodyObject));
+        } else if (httpMethod == HttpMethod.DELETE) {
+            httpRequestBuilder = httpRequestBuilder.DELETE();
+        } else if (httpMethod == HttpMethod.GET) {
+            httpRequestBuilder = httpRequestBuilder.GET();
         }
 
         return httpRequestBuilder.build();
     }
 
-    private static HttpResponse<String> sendHttpRequest(HttpRequest httpRequest,
-                                                        String endpoint,
-                                                        Object bodyObject) throws IOException, InterruptedException {
-        log.info("Sending Http Request to endpoint [ {} ] with request body [ {} ]",
-                endpoint, bodyObject == null ? null : bodyObject.getClass().getName());
-        HttpResponse<String> httpResponse = getHttpClient().send(httpRequest, HttpResponse.BodyHandlers.ofString());
-        log.info("Received Http Response for endpoint [ {} ] with status [ {} ] and response body [ {} ]",
-                endpoint, httpResponse.statusCode(), httpResponse.body().length());
-
-        return httpResponse;
+    private static HttpResponse<String> sendHttpRequest(HttpRequest httpRequest) throws IOException, InterruptedException {
+        return getHttpClient().send(httpRequest, HttpResponse.BodyHandlers.ofString());
     }
 
-    public static HttpResponse<String> sendHttpRequest(String endpoint,
-                                                           Object bodyObject,
-                                                           boolean isGet,
-                                                           String authorization) {
+    public static Object sendHttpRequest(String endpoint,
+                                         HttpMethod httpMethod,
+                                         Object bodyObject,
+                                         Map<String, String> headers,
+                                         Class<?> clazz) {
         try {
-            HttpRequest httpRequest = getHttpRequestBuilder(endpoint, bodyObject, isGet, authorization);
-            return sendHttpRequest(httpRequest, endpoint, bodyObject);
+            log.info("HTTP Request Sent::: Endpoint: [ {} ], Method: [ {} ], Headers: [ {} ], Body: [ {} ]",
+                    endpoint,
+                    httpMethod,
+                    headers == null ? 0 : headers.size(),
+                    bodyObject == null ? null : bodyObject.getClass().getName());
+
+            HttpRequest httpRequest = getHttpRequestBuilder(endpoint, httpMethod, bodyObject, headers);
+            HttpResponse<String> httpResponse = sendHttpRequest(httpRequest);
+
+            log.info("HTTP Response Received::: Endpoint: [ {} ], Status: [ {} ], Body: [ {} ]",
+                    endpoint,
+                    httpResponse.statusCode(),
+                    httpResponse.body() == null ? null : httpResponse.body().length());
+
+            return Util.getGson().fromJson(httpResponse.body(), clazz);
         } catch (InterruptedException ex) {
-            log.error("Error in HttpClient Send: {} | {}", endpoint, bodyObject, ex);
+            log.error("Error in HttpClient Send: {} | {}", endpoint, httpMethod, ex);
             Thread.currentThread().interrupt();
         } catch (Exception ex) {
-            log.error("Error in HttpClient Send: {} | {}", endpoint, bodyObject, ex);
+            log.error("Error in HttpClient Send: {} | {}", endpoint, httpMethod, ex);
         }
 
-        return null;
+        throw new CustomRuntimeException("HTTP ERROR");
     }
 }

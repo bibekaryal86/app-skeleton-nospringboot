@@ -32,6 +32,9 @@ dependencies {
     // IF USING MONGO
     // implementation 'org.mongodb:mongodb-driver-sync:4.4.0'
 
+    // IF USING SCHEDULER (Check router-usage-statistics-java for example)
+    // implementation 'org.quartz-scheduler:quartz:2.3.2'
+
     // FOR TESTING
     // testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     // testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
