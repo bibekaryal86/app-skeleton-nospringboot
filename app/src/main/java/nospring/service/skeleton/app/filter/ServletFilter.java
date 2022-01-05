@@ -26,7 +26,7 @@ public class ServletFilter implements Filter {
         if ("/favicon.ico".equals(httpServletRequest.getRequestURI())) {
             httpServletResponse.setStatus(200);
         } else {
-            httpServletRequest.setAttribute("TRACE", ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE));
+            httpServletRequest.setAttribute(TRACE, ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE));
             logRequest(httpServletRequest);
 
             if (DO_NOT_FILTER.contains(httpServletRequest.getRequestURI()) ||
