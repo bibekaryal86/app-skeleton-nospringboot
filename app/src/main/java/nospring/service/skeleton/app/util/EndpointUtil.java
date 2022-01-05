@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static nospring.service.skeleton.app.util.Util.*;
+
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class EndpointUtil {
@@ -25,10 +27,10 @@ public class EndpointUtil {
 
     private static Map<String, String> setEndpointMap() {
         Map<String, String> endpointMap = new HashMap<>();
-        String profile = Util.getSystemEnvProperty(Util.PROFILE);
+        String profile = getSystemEnvProperty(PROFILE);
         String endpointBase;
 
-        if (!Util.hasText(profile)) {
+        if (!hasText(profile)) {
             throw new CustomRuntimeException("PROFILE NOT SET AT RUNTIME");
         }
 
