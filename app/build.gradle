@@ -32,7 +32,7 @@ dependencies {
     // IF USING MONGO
     // implementation 'org.mongodb:mongodb-driver-sync:4.4.0'
 
-    // IF USING SCHEDULER (Check router-usage-statistics-java for example)
+    // IF USING SCHEDULER
     // implementation 'org.quartz-scheduler:quartz:2.3.2'
 
     // FOR TESTING

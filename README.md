@@ -24,6 +24,10 @@
   * `.gitignore` if necessary
   * `App.java`
     * begin and end logs
+* Things to add:
+  * `Scheduler.java` and scheduled jobs for any scheduled tasks
+    * See: `router-usage-statistics-java` for Quartz scheduler example
+      * https://github.com/bibekaryal86/router-usage-statistics-java
 * Things to remove:
   * If not using cache
     * Remove `AppReset` from servlet package and it's mapping from `ServerJetty.java` and `ServletFilter.java`
