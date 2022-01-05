@@ -85,10 +85,10 @@ public class ConnectorUtil {
 
             return Util.getGson().fromJson(httpResponse.body(), clazz);
         } catch (InterruptedException ex) {
-            log.error("Error in HttpClient Send: {} | {}", endpoint, httpMethod, ex);
+            log.error("Error in HttpClient Send: [ {} ] | [ {} ]", endpoint, httpMethod, ex);
             Thread.currentThread().interrupt();
         } catch (Exception ex) {
-            log.error("Error in HttpClient Send: {} | {}", endpoint, httpMethod, ex);
+            log.error("Error in HttpClient Send: [ {} ] | [ {} ] ", endpoint, httpMethod, ex);
         }
 
         throw new CustomRuntimeException("HTTP ERROR");
