@@ -24,6 +24,8 @@
   * `.gitignore` if necessary
   * `App.java`
     * begin and end logs
+  * About `SPRING_PROFILES_ACTIVE` 
+    * This environment variable is named as such to match the app's spring-boot counterpart if any
 * Things to add:
   * `Scheduler.java` and scheduled jobs for any scheduled tasks
     * See: `router-usage-statistics-java` for Quartz scheduler example
