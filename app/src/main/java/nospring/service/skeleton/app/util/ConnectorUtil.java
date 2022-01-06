@@ -14,6 +14,8 @@ import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.util.Map;
 
+import static nospring.service.skeleton.app.util.Util.getGson;
+
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ConnectorUtil {
@@ -29,7 +31,7 @@ public class ConnectorUtil {
     }
 
     private static HttpRequest.BodyPublisher getPOST(Object object) {
-        return HttpRequest.BodyPublishers.ofString(Util.getGson().toJson(object));
+        return HttpRequest.BodyPublishers.ofString(getGson().toJson(object));
     }
 
     private static HttpRequest getHttpRequestBuilder(String endpoint,
@@ -83,12 +85,12 @@ public class ConnectorUtil {
                     httpResponse.statusCode(),
                     httpResponse.body() == null ? null : httpResponse.body().length());
 
-            return Util.getGson().fromJson(httpResponse.body(), clazz);
+            return getGson().fromJson(httpResponse.body(), clazz);
         } catch (InterruptedException ex) {
-            log.error("Error in HttpClient Send: {} | {}", endpoint, httpMethod, ex);
+            log.error("Error in HttpClient Send: [ {} ] | [ {} ]", endpoint, httpMethod, ex);
             Thread.currentThread().interrupt();
         } catch (Exception ex) {
-            log.error("Error in HttpClient Send: {} | {}", endpoint, httpMethod, ex);
+            log.error("Error in HttpClient Send: [ {} ] | [ {} ] ", endpoint, httpMethod, ex);
         }
 
         throw new CustomRuntimeException("HTTP ERROR");
