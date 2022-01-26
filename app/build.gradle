@@ -27,7 +27,7 @@ dependencies {
             strictly '1.7.32'
         }
     }
-    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.10'
 
     // IF USING MONGO
     // implementation 'org.mongodb:mongodb-driver-sync:4.4.0'
