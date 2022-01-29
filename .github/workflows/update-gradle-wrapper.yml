@@ -3,7 +3,7 @@ name: Update Gradle Wrapper
 on:
   schedule:
     # every week on Monday at 8am
-    - cron: "* * * * SAT"
+    - cron: "* * * * FRI"
 
 jobs:
   update-gradle-wrapper:
