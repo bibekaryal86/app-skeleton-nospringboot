@@ -30,14 +30,14 @@ dependencies {
     implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.4.0'
 
     // IF USING MONGO
-    // implementation 'org.mongodb:mongodb-driver-sync:4.4.0'
+    implementation 'org.mongodb:mongodb-driver-sync:4.4.0'
 
     // IF USING SCHEDULER
-    // implementation 'org.quartz-scheduler:quartz:2.3.2'
+    implementation 'org.quartz-scheduler:quartz:2.3.2'
 
     // FOR TESTING
-    // testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    // testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 }
 
 application {

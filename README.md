@@ -33,3 +33,5 @@
 * Things to remove:
   * If not using cache
     * Remove `AppReset` from servlet package and it's mapping from `ServerJetty.java` and `ServletFilter.java`
+  * GitHub workflows
+    * Remove `dependabot.yml` in the new app until automated merge is figured out
