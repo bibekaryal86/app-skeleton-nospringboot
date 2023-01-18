@@ -20,6 +20,7 @@ repositories {
 dependencies {
     def jettyVersion = "11.0.13"
     def junitVersion = "5.9.2"
+    
     implementation "org.eclipse.jetty:jetty-server:$jettyVersion"
     implementation "org.eclipse.jetty:jetty-servlet:$jettyVersion"
     implementation 'com.google.code.gson:gson:2.10.1'
