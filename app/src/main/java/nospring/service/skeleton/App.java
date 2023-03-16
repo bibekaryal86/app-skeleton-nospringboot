@@ -8,9 +8,9 @@ import nospring.service.skeleton.app.server.ServerJetty;
 
 @Slf4j
 public class App {
-    public static void main(String[] args) throws Exception {
-        log.info("Begin nospring-service-skeleton initialization...");
-        new ServerJetty().start();
-        log.info("End nospring-service-skeleton initialization...");
-    }
+  public static void main(String[] args) throws Exception {
+    log.info("Begin nospring-service-skeleton initialization...");
+    new ServerJetty().start();
+    log.info("End nospring-service-skeleton initialization...");
+  }
 }

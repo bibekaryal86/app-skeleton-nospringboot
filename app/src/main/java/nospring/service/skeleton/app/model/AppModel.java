@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AppModel {
-    private String varOne;
-    private Integer varTwo;
-    private boolean varThree;
+  private String varOne;
+  private Integer varTwo;
+  private boolean varThree;
 }
