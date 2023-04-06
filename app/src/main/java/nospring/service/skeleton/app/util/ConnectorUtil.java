@@ -13,7 +13,6 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import nospring.service.skeleton.app.exception.CustomRuntimeException;
-import org.eclipse.jetty.http.HttpMethod;
 
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -32,7 +31,7 @@ public class ConnectorUtil {
   }
 
   private static HttpRequest getHttpRequestBuilder(
-      String endpoint, HttpMethod httpMethod, Object bodyObject, Map<String, String> headers) {
+      String endpoint, Util.HttpMethod httpMethod, Object bodyObject, Map<String, String> headers) {
     HttpRequest.Builder httpRequestBuilder =
         HttpRequest.newBuilder().uri(getUri(endpoint)).header("Content-Type", "application/json");
 
@@ -42,13 +41,13 @@ public class ConnectorUtil {
       }
     }
 
-    if (httpMethod == HttpMethod.POST) {
+    if (httpMethod == Util.HttpMethod.POST) {
       httpRequestBuilder = httpRequestBuilder.POST(getPOST(bodyObject));
-    } else if (httpMethod == HttpMethod.PUT) {
+    } else if (httpMethod == Util.HttpMethod.PUT) {
       httpRequestBuilder = httpRequestBuilder.PUT(getPOST(bodyObject));
-    } else if (httpMethod == HttpMethod.DELETE) {
+    } else if (httpMethod == Util.HttpMethod.DELETE) {
       httpRequestBuilder = httpRequestBuilder.DELETE();
-    } else if (httpMethod == HttpMethod.GET) {
+    } else if (httpMethod == Util.HttpMethod.GET) {
       httpRequestBuilder = httpRequestBuilder.GET();
     }
 
@@ -62,12 +61,12 @@ public class ConnectorUtil {
 
   public static Object sendHttpRequest(
       String endpoint,
-      HttpMethod httpMethod,
+      Util.HttpMethod httpMethod,
       Object bodyObject,
       Map<String, String> headers,
       Class<?> clazz) {
     try {
-      log.info(
+      log.debug(
           "HTTP Request Sent::: Endpoint: [ {} ], Method: [ {} ], Headers: [ {} ], Body: [ {} ]",
           endpoint,
           httpMethod,
@@ -77,7 +76,7 @@ public class ConnectorUtil {
       HttpRequest httpRequest = getHttpRequestBuilder(endpoint, httpMethod, bodyObject, headers);
       HttpResponse<String> httpResponse = sendHttpRequest(httpRequest);
 
-      log.info(
+      log.debug(
           "HTTP Response Received::: Endpoint: [ {} ], Status: [ {} ], Body: [ {} ]",
           endpoint,
           httpResponse.statusCode(),

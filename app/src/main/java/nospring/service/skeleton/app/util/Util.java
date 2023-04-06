@@ -94,4 +94,11 @@ public class Util {
       return null;
     }
   }
+
+  public enum HttpMethod {
+    POST,
+    PUT,
+    DELETE,
+    GET
+  }
 }
