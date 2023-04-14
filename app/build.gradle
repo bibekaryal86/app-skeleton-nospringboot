@@ -26,13 +26,13 @@ repositories {
 }
 
 dependencies {
-    def jettyVersion = "11.0.14"
+    def jettyVersion = "11.0.15"
     def junitVersion = "5.9.2"
     
     implementation "org.eclipse.jetty:jetty-server:$jettyVersion"
     implementation "org.eclipse.jetty:jetty-servlet:$jettyVersion"
     implementation 'com.google.code.gson:gson:2.10.1'
-
+    
     implementation 'org.slf4j:slf4j-api:2.0.7'
     implementation 'ch.qos.logback:logback-classic:1.4.6'
 
