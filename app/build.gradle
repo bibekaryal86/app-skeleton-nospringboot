@@ -33,11 +33,7 @@ dependencies {
     implementation "org.eclipse.jetty:jetty-servlet:$jettyVersion"
     implementation 'com.google.code.gson:gson:2.10.1'
 
-    implementation('org.slf4j:slf4j-api') {
-        version {
-            strictly '1.7.32'
-        }
-    }
+    implementation 'org.slf4j:slf4j-api:1.7.32'
     implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.4.6'
 
     // IF USING MONGO
