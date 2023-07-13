@@ -37,7 +37,7 @@ dependencies {
     implementation 'ch.qos.logback:logback-classic:1.4.8'
 
     // IF USING MONGO
-    implementation 'org.mongodb:mongodb-driver-sync:4.10.1'
+    implementation 'org.mongodb:mongodb-driver-sync:4.10.2'
 
     // IF USING SCHEDULER
     implementation 'org.quartz-scheduler:quartz:2.3.2'
