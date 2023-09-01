@@ -7,10 +7,10 @@ import java.util.EnumSet;
 import nospring.service.skeleton.app.filter.ServletFilter;
 import nospring.service.skeleton.app.servlet.AppPing;
 import nospring.service.skeleton.app.servlet.AppReset;
+import org.eclipse.jetty.ee10.servlet.ServletHandler;
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
-import org.eclipse.jetty.servlet.ServletHandler;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
 
 public class ServerJetty {
