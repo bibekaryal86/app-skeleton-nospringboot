@@ -7,7 +7,7 @@ import java.util.EnumSet;
 import nospring.service.skeleton.app.filter.ServletFilter;
 import nospring.service.skeleton.app.servlet.AppPing;
 import nospring.service.skeleton.app.servlet.AppReset;
-import org.eclipse.jetty.ee10.servlet.ServletHandler;
+import org.eclipse.jetty.ee10.servlet.ServletContextHandler;
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
@@ -30,13 +30,12 @@ public class ServerJetty {
     server.start();
   }
 
-  private ServletHandler getServletHandler() {
-    ServletHandler servletHandler = new ServletHandler();
-    servletHandler.addFilterWithMapping(
-        ServletFilter.class, "/*", EnumSet.of(DispatcherType.REQUEST));
+  private ServletContextHandler getServletHandler() {
+    ServletContextHandler servletHandler = new ServletContextHandler();
+    servletHandler.addFilter(ServletFilter.class, "/*", EnumSet.of(DispatcherType.REQUEST));
 
-    servletHandler.addServletWithMapping(AppPing.class, CONTEXT_PATH + "/tests/ping");
-    servletHandler.addServletWithMapping(AppReset.class, CONTEXT_PATH + "/tests/reset");
+    servletHandler.addServlet(AppPing.class, CONTEXT_PATH + "/tests/ping");
+    servletHandler.addServlet(AppReset.class, CONTEXT_PATH + "/tests/reset");
 
     return servletHandler;
   }
