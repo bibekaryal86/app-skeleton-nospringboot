@@ -11,7 +11,7 @@ plugins {
     id 'application'
     id 'java'
     id 'io.freefair.lombok' version '8.4'
-    id 'com.diffplug.spotless' version '6.22.0'
+    id 'com.diffplug.spotless' version '6.23.0'
 }
 
 java {
@@ -34,7 +34,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.10.1'
     
     implementation 'org.slf4j:slf4j-api:2.0.9'
-    implementation 'ch.qos.logback:logback-classic:1.4.11'
+    implementation 'ch.qos.logback:logback-classic:1.4.12'
 
     // IF USING MONGO
     implementation 'org.mongodb:mongodb-driver-sync:4.11.1'
