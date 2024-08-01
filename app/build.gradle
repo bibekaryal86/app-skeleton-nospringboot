@@ -26,7 +26,7 @@ repositories {
 }
 
 dependencies {
-    def jettyVersion = "12.0.11"
+    def jettyVersion = "12.0.12"
     def junitVersion = "5.10.3"
     
     implementation "org.eclipse.jetty:jetty-server:$jettyVersion"
