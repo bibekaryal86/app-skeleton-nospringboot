@@ -1,12 +1,12 @@
 # Build
-FROM gradle:8.10-jdk17-alpine AS build
+FROM gradle:8.10.2-jdk21-alpine AS build
 WORKDIR /app
 COPY app/build.gradle .
 COPY app/src /app/src
 RUN gradle --no-daemon clean build
 
 # Deploy
-FROM eclipse-temurin:17-jre-alpine
+FROM eclipse-temurin:21-jre-alpine
 RUN addgroup -S springdocker
 RUN adduser -S springdocker -G springdocker
 USER springdocker:springdocker
