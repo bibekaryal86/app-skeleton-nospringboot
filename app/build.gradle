@@ -42,7 +42,7 @@ dependencies {
     implementation 'org.mongodb:mongodb-driver-sync:5.2.1'
 
     // IF USING SCHEDULER
-    implementation 'org.quartz-scheduler:quartz:2.3.2'
+    implementation 'org.quartz-scheduler:quartz:2.5.0'
 
     // FOR TESTING
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
