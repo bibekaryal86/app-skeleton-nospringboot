@@ -11,7 +11,7 @@ plugins {
     id 'application'
     id 'java'
     id 'io.freefair.lombok' version '8.11'
-    id 'com.diffplug.spotless' version '6.25.0'
+    id 'com.diffplug.spotless' version '7.0.0'
 }
 
 java {
@@ -28,15 +28,15 @@ repositories {
 }
 
 dependencies {
-    def jettyVersion = "12.0.15"
-    def junitVersion = "5.11.3"
+    def jettyVersion = "12.0.16"
+    def junitVersion = "5.11.4"
     
     implementation "org.eclipse.jetty:jetty-server:$jettyVersion"
     implementation "org.eclipse.jetty.ee10:jetty-ee10-servlet:$jettyVersion"
     implementation 'com.google.code.gson:gson:2.11.0'
     
     implementation 'org.slf4j:slf4j-api:2.0.16'
-    implementation 'ch.qos.logback:logback-classic:1.5.12'
+    implementation 'ch.qos.logback:logback-classic:1.5.16'
 
     // IF USING MONGO
     implementation 'org.mongodb:mongodb-driver-sync:5.2.1'
