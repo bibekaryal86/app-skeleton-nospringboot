@@ -28,7 +28,7 @@ repositories {
 }
 
 dependencies {
-    def jettyVersion = "12.1.6"
+    def jettyVersion = "12.1.7"
     def junitVersion = "6.0.3"
     
     implementation "org.eclipse.jetty:jetty-server:$jettyVersion"
@@ -39,7 +39,7 @@ dependencies {
     implementation 'ch.qos.logback:logback-classic:1.5.32'
 
     // IF USING MONGO
-    implementation 'org.mongodb:mongodb-driver-sync:5.6.3'
+    implementation 'org.mongodb:mongodb-driver-sync:5.6.4'
 
     // IF USING SCHEDULER
     implementation 'org.quartz-scheduler:quartz:2.5.2'
